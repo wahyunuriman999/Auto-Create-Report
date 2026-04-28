@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // =========================================================================
+    // KONFIGURASI SERVER
+    // Jika Anda sudah deploy ke Render, ganti link di bawah ini!
+    // Contoh: const API_BASE_URL = 'https://nexus-data-api.onrender.com';
+    // =========================================================================
+    const API_BASE_URL = 'http://localhost:8000';
+
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('file-input');
     const fileNameDisplay = document.getElementById('file-name-display');
@@ -87,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Note: Update URL if backend is hosted elsewhere
-            const response = await fetch('http://localhost:8000/api/process', {
+            const response = await fetch(`${API_BASE_URL}/api/process`, {
                 method: 'POST',
                 body: formData
             });
@@ -228,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData();
             formData.append('pivot_data', JSON.stringify(currentFilteredPivotData));
 
-            const response = await fetch('http://localhost:8000/api/download_excel', {
+            const response = await fetch(`${API_BASE_URL}/api/download_excel`, {
                 method: 'POST',
                 body: formData
             });
