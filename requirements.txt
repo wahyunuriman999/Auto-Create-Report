@@ -1,5 +1,6 @@
 fastapi
 uvicorn
+gunicorn
 pandas
 openpyxl
 python-multipart
