@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Data Dashboard & AI Report</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Nexus Data <span>Intelligence</span></h1>
+            <p>Automated AI-Driven Dashboards & Reporting</p>
+        </header>
+
+        <main class="main-content">
+            <!-- INGESTION & CONFIG PANEL -->
+            <section class="glass-panel config-section">
+                <h2>1. Data Source & Configuration</h2>
+                
+                <form id="process-form">
+                    <div class="input-group">
+                        <label>Upload File (Excel/CSV up to 500MB) OR Google Sheets Link</label>
+                        <div class="upload-zone" id="drop-zone">
+                            <p>Drag & Drop file here or <span class="highlight">Browse</span></p>
+                            <input type="file" id="file-input" accept=".csv, .xls, .xlsx" hidden>
+                        </div>
+                        <div class="file-name-display" id="file-name-display"></div>
+                        <div class="separator"><span>OR</span></div>
+                        <input type="url" id="url-input" class="modern-input" placeholder="https://docs.google.com/spreadsheets/d/.../edit">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Select Outputs (Check all that apply)</label>
+                        <div class="checkbox-group">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="chk-dashboard" checked>
+                                <span class="checkmark"></span> Dashboard (Charts)
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="chk-pivot" checked>
+                                <span class="checkmark"></span> Pivot Table
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="chk-report" checked>
+                                <span class="checkmark"></span> AI Report
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="ai-notes">Additional Notes for AI (Optional)</label>
+                        <textarea id="ai-notes" class="modern-input" rows="3" placeholder="E.g., Focus on analyzing the trend of sales over time..."></textarea>
+                    </div>
+
+                    <button type="submit" class="primary-btn" id="submit-btn">
+                        <span class="btn-text">Generate Intelligence</span>
+                        <div class="loader hidden" id="btn-loader"></div>
+                    </button>
+                </form>
+            </section>
+
+            <!-- RESULTS PANEL -->
+            <section class="results-section hidden" id="results-section">
+                
+                <!-- ACTION BUTTONS & SLICERS -->
+                <div class="glass-panel result-card controls-card" id="card-controls">
+                    <div class="slicer-container">
+                        <h3><span class="icon">🔍</span> Interactive Web Slicers</h3>
+                        <p class="slicer-desc">Filter data in real-time before downloading.</p>
+                        <div id="slicer-buttons" class="slicer-buttons">
+                            <!-- Slicer buttons injected here -->
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn" id="btn-download-img">Download Chart (PNG)</button>
+                        <button class="action-btn" id="btn-download-excel">Download Dashboard (Excel)</button>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD -->
+                <div class="glass-panel result-card hidden" id="card-dashboard">
+                    <h2><span class="icon">📊</span> Interactive Dashboard</h2>
+                    <div class="chart-container">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- AI REPORT -->
+                <div class="glass-panel result-card hidden" id="card-report">
+                    <h2><span class="icon">🤖</span> Executive AI Report</h2>
+                    <div class="report-content" id="report-content">
+                        <!-- Markdown content goes here -->
+                    </div>
+                </div>
+
+                <!-- PIVOT TABLE -->
+                <div class="glass-panel result-card hidden" id="card-pivot">
+                    <h2><span class="icon">🧮</span> Data Pivot & Summary</h2>
+                    <div class="table-container">
+                        <table class="modern-table" id="pivot-table">
+                            <thead>
+                                <tr id="pivot-header"></tr>
+                            </thead>
+                            <tbody id="pivot-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Simple Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
