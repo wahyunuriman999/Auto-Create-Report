@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add "All" button
         const btnAll = document.createElement('button');
-        btnAll.className = 'slicer-btn active';
+        btnAll.className = 'slicer-btn btn btn-primary btn-sm rounded-lg';
         btnAll.textContent = 'Semua';
         btnAll.onclick = () => filterData(null, btnAll);
         slicerContainer.appendChild(btnAll);
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         categories.forEach(cat => {
             if(!cat) return;
             const btn = document.createElement('button');
-            btn.className = 'slicer-btn';
+            btn.className = 'slicer-btn btn btn-outline btn-sm rounded-lg';
             btn.textContent = cat;
             btn.onclick = () => filterData(cat, btn);
             slicerContainer.appendChild(btn);
@@ -173,8 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function filterData(category, activeBtn) {
         // Update active class
-        document.querySelectorAll('.slicer-btn').forEach(btn => btn.classList.remove('active'));
-        activeBtn.classList.add('active');
+        document.querySelectorAll('.slicer-btn').forEach(btn => {
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-outline');
+        });
+        activeBtn.classList.remove('btn-outline');
+        activeBtn.classList.add('btn-primary');
 
         if (category === null) {
             currentFilteredPivotData.data = [...globalPivotData.data];
